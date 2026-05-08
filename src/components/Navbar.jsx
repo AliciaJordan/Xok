@@ -22,21 +22,23 @@ export default function Navbar() {
 
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2.5 group" onClick={() => setOpen(false)}>
-          <XokLogo className="h-8 w-8 group-hover:scale-110 transition-transform duration-200" style={{ filter: 'drop-shadow(0 0 8px rgba(0,200,255,0.7))' }} />
+          <XokLogo
+            className="h-8 w-8 group-hover:scale-110 transition-transform duration-200"
+            style={{ filter: 'drop-shadow(0 2px 6px rgba(0,140,220,0.4))' }}
+          />
           <div>
             <span
               className="font-display text-lg font-black leading-none"
               style={{
-                background: 'linear-gradient(135deg, #f0faff 0%, #70e0ff 60%, #22ccff 100%)',
+                background: 'linear-gradient(135deg, #0060b0 0%, #0090d8 60%, #00b4f0 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
-                filter: 'drop-shadow(0 0 8px rgba(0,200,255,0.5))',
               }}
             >
               XOK
             </span>
-            <p className="holo-label" style={{ fontSize: '0.45rem', lineHeight: 1, marginTop: 1 }}>MARINE OS v2.8</p>
+            <p className="holo-label" style={{ fontSize: '0.45rem', lineHeight: 1, marginTop: 1 }}>Marine Biology OS</p>
           </div>
         </Link>
 
@@ -55,29 +57,36 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* Right: XP compact + scan CTA */}
+        {/* Right: XP + scan count + CTA */}
         <div className="hidden lg:flex items-center gap-4">
           <XPBar compact />
           <div
-            className="text-center px-3 py-1 rounded-lg"
-            style={{ background: 'rgba(0,40,80,0.6)', border: '1px solid rgba(0,176,232,0.3)' }}
+            className="text-center px-3 py-1.5 rounded-xl"
+            style={{
+              background: 'rgba(255,255,255,0.6)',
+              border: '1px solid rgba(160,210,240,0.5)',
+              boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.9)',
+            }}
           >
-            <p className="terminal-text" style={{ fontSize: '0.55rem' }}>SCANS</p>
-            <p className="holo-label text-base font-black leading-none">{scansCompleted}</p>
+            <p className="holo-label" style={{ fontSize: '0.5rem' }}>Scans</p>
+            <p className="font-display font-black text-base leading-none" style={{ color: '#1878c8' }}>{scansCompleted}</p>
           </div>
           <Link to="/classifier" className="btn-aqua btn-aqua-sm">
-            ◈ Identify Shark
+            🦈 Identify Shark
           </Link>
         </div>
 
         {/* Mobile hamburger */}
         <button
           className="lg:hidden rounded-xl p-2.5 transition-colors"
-          style={{ background: 'rgba(0,100,180,0.3)', border: '1px solid rgba(0,176,232,0.4)' }}
+          style={{
+            background: 'rgba(255,255,255,0.6)',
+            border: '1px solid rgba(160,210,240,0.5)',
+          }}
           aria-label="Toggle menu"
           onClick={() => setOpen(!open)}
         >
-          <svg className="h-5 w-5 text-aqua-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="h-5 w-5" style={{ color: '#1870b8' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
             {open
               ? <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
               : <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
@@ -90,7 +99,11 @@ export default function Navbar() {
       {open && (
         <div
           className="lg:hidden px-4 pb-4 pt-2 space-y-1"
-          style={{ borderTop: '1px solid rgba(0,176,232,0.2)', background: 'rgba(0,20,50,0.95)' }}
+          style={{
+            borderTop: '1px solid rgba(160,210,240,0.4)',
+            background: 'rgba(240,250,255,0.95)',
+            backdropFilter: 'blur(20px)',
+          }}
         >
           {NAV_LINKS.map(({ to, label }) => (
             <NavLink
@@ -99,15 +112,14 @@ export default function Navbar() {
               end={to === '/'}
               className={({ isActive }) =>
                 `block rounded-xl px-4 py-2.5 text-sm font-semibold transition-all ${
-                  isActive
-                    ? 'text-white'
-                    : 'text-aqua-300'
+                  isActive ? 'text-ocean-900' : 'text-ocean-600'
                 }`
               }
               style={({ isActive }) => isActive ? {
-                background: 'rgba(0,176,232,0.25)',
-                boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.1)',
-              } : {}}
+                background: 'rgba(100,180,240,0.25)',
+                color: '#003070',
+                boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.7)',
+              } : { color: '#2060a0' }}
               onClick={() => setOpen(false)}
             >
               {label}
@@ -116,7 +128,7 @@ export default function Navbar() {
           <div className="pt-2 space-y-2">
             <XPBar compact />
             <Link to="/classifier" className="btn-aqua w-full" onClick={() => setOpen(false)}>
-              ◈ Identify Shark
+              🦈 Identify Shark
             </Link>
           </div>
         </div>

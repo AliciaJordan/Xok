@@ -3,9 +3,23 @@ export default function SonarDisplay({ active = true, locked = false, size = 220
 
   return (
     <div
-      className="sonar-screen scanlines rounded-full flex items-center justify-center relative"
-      style={{ width: size, height: size, flexShrink: 0 }}
+      className="rounded-full flex items-center justify-center relative flex-shrink-0"
+      style={{
+        width: size, height: size,
+        background: 'radial-gradient(circle, rgba(220,245,255,0.9) 0%, rgba(160,220,250,0.7) 60%, rgba(100,190,240,0.5) 100%)',
+        border: '2px solid rgba(255,255,255,0.8)',
+        boxShadow: '0 4px 24px rgba(60,160,240,0.25), inset 0 0 40px rgba(180,230,255,0.3), inset 0 1px 0 rgba(255,255,255,0.9)',
+        overflow: 'hidden',
+      }}
     >
+      {/* Gloss overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none rounded-full"
+        style={{
+          background: 'linear-gradient(160deg, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0) 50%)',
+        }}
+      />
+
       {/* Rings */}
       {rings.map((r) => (
         <div
@@ -14,18 +28,18 @@ export default function SonarDisplay({ active = true, locked = false, size = 220
           style={{
             width:  `${r * 100}%`,
             height: `${r * 100}%`,
-            border: '1px solid rgba(0,255,100,0.18)',
+            border: '1px solid rgba(60,140,220,0.22)',
           }}
         />
       ))}
 
       {/* Crosshairs */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div className="absolute w-full h-px" style={{ background: 'rgba(0,255,100,0.15)' }} />
-        <div className="absolute w-px h-full" style={{ background: 'rgba(0,255,100,0.15)' }} />
+        <div className="absolute w-full h-px" style={{ background: 'rgba(60,140,220,0.18)' }} />
+        <div className="absolute w-px h-full" style={{ background: 'rgba(60,140,220,0.18)' }} />
       </div>
 
-      {/* Sweep arm */}
+      {/* Sweep arm — only when actively scanning */}
       {active && (
         <div
           className="absolute inset-0 animate-sonar-sweep"
@@ -40,49 +54,65 @@ export default function SonarDisplay({ active = true, locked = false, size = 220
               height: '44%',
               transformOrigin: 'top center',
               transform: 'translateX(-50%) rotate(0deg)',
-              background: 'linear-gradient(to bottom, rgba(0,255,100,0.9), transparent)',
-              boxShadow: '0 0 8px rgba(0,255,100,0.6)',
+              background: 'linear-gradient(to bottom, rgba(30,130,220,0.8), transparent)',
             }}
           />
-          {/* Sweep gradient wedge */}
           <div
             className="absolute inset-0 rounded-full"
             style={{
-              background: 'conic-gradient(from 0deg, rgba(0,255,100,0.12) 0deg, transparent 60deg)',
+              background: 'conic-gradient(from 0deg, rgba(60,160,240,0.18) 0deg, transparent 55deg)',
             }}
           />
         </div>
       )}
 
-      {/* Ping rings */}
+      {/* Soft ping rings — only when scanning */}
       {active && (
         <>
-          <div className="absolute inset-0 rounded-full border border-sonar/40 animate-sonar-ping" />
-          <div className="absolute inset-0 rounded-full border border-sonar/40 animate-sonar-ping-2" />
-          <div className="absolute inset-0 rounded-full border border-sonar/40 animate-sonar-ping-3" />
+          <div
+            className="absolute rounded-full animate-sonar-ping"
+            style={{ inset: 0, border: '1px solid rgba(60,140,220,0.35)' }}
+          />
+          <div
+            className="absolute rounded-full animate-sonar-ping-2"
+            style={{ inset: 0, border: '1px solid rgba(60,140,220,0.35)' }}
+          />
+          <div
+            className="absolute rounded-full animate-sonar-ping-3"
+            style={{ inset: 0, border: '1px solid rgba(60,140,220,0.35)' }}
+          />
         </>
       )}
 
       {/* Centre dot */}
-      <div className="absolute rounded-full" style={{ width: 6, height: 6, background: '#00ff88', boxShadow: '0 0 8px #00ff88' }} />
+      <div
+        className="absolute rounded-full"
+        style={{ width: 8, height: 8, background: '#3090d8', boxShadow: '0 0 8px rgba(48,144,216,0.6)' }}
+      />
 
-      {/* LOCKED blip */}
+      {/* Locked blip */}
       {locked && (
         <div
-          className="absolute rounded-full animate-ripple"
+          className="absolute rounded-full animate-ripple-soft"
           style={{
-            width: 14, height: 14,
-            background: 'rgba(0,255,100,0.9)',
-            boxShadow: '0 0 12px #00ff88',
-            top: '28%', left: '55%',
+            width: 12, height: 12,
+            background: 'rgba(30,150,255,0.85)',
+            boxShadow: '0 0 10px rgba(30,150,255,0.5)',
+            top: '30%', left: '57%',
           }}
         />
       )}
 
-      {/* Status text */}
+      {/* Status label */}
       <div className="absolute bottom-4 left-0 right-0 text-center">
-        <p className="terminal-text" style={{ fontSize: '0.55rem', letterSpacing: '0.12em' }}>
-          {locked ? '●  LOCKED ON' : active ? '●  SCANNING' : '○  STANDBY'}
+        <p style={{
+          fontFamily: 'Courier New, monospace',
+          fontSize: '0.52rem',
+          letterSpacing: '0.1em',
+          color: 'rgba(30,90,160,0.75)',
+          fontWeight: 600,
+        }}>
+          {locked ? '● Species Located' : active ? '● Scanning...' : '○ Standby'}
         </p>
       </div>
     </div>

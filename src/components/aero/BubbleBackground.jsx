@@ -2,13 +2,13 @@ import { useMemo } from 'react'
 
 export default function BubbleBackground() {
   const bubbles = useMemo(() =>
-    Array.from({ length: 22 }, (_, i) => ({
+    Array.from({ length: 16 }, (_, i) => ({
       id: i,
-      size:     4 + (i * 7) % 26,
-      left:     (i * 17 + 5) % 100,
-      delay:    (i * 1.3) % 9,
-      duration: 7 + (i * 2.1) % 9,
-      opacity:  0.08 + (i % 5) * 0.05,
+      size:     6 + (i * 9) % 28,
+      left:     (i * 19 + 4) % 100,
+      delay:    (i * 1.8) % 11,
+      duration: 11 + (i * 2.3) % 10,
+      opacity:  0.18 + (i % 5) * 0.06,
     })), [])
 
   return (
@@ -25,12 +25,12 @@ export default function BubbleBackground() {
             opacity: b.opacity,
             animationDelay:    `${b.delay}s`,
             animationDuration: `${b.duration}s`,
-            background: `radial-gradient(circle at 30% 25%,
-              rgba(180,240,255,0.6),
-              rgba(0,180,230,0.1)
+            background: `radial-gradient(circle at 30% 28%,
+              rgba(255,255,255,0.85),
+              rgba(160,220,255,0.25)
             )`,
-            border:    '1px solid rgba(120,220,255,0.35)',
-            boxShadow: '0 0 6px rgba(0,200,255,0.2)',
+            border:    '1px solid rgba(255,255,255,0.7)',
+            boxShadow: '0 0 8px rgba(100,200,255,0.25)',
           }}
         />
       ))}

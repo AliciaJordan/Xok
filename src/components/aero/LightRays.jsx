@@ -2,13 +2,13 @@ import { useMemo } from 'react'
 
 export default function LightRays() {
   const rays = useMemo(() =>
-    Array.from({ length: 8 }, (_, i) => ({
+    Array.from({ length: 6 }, (_, i) => ({
       id: i,
-      left:     8 + i * 12,
-      width:    30 + (i % 3) * 20,
-      delay:    i * 0.7,
-      duration: 4 + (i % 3),
-      opacity:  0.03 + (i % 4) * 0.015,
+      left:     6 + i * 16,
+      width:    40 + (i % 3) * 24,
+      delay:    i * 1.1,
+      duration: 6 + (i % 3) * 1.5,
+      opacity:  0.08 + (i % 3) * 0.04,
     })), [])
 
   return (
@@ -25,8 +25,8 @@ export default function LightRays() {
             opacity:        r.opacity,
             animationDelay:    `${r.delay}s`,
             animationDuration: `${r.duration}s`,
-            transform:     'skewX(-18deg)',
-            background:    'linear-gradient(180deg, rgba(0,200,255,0.9) 0%, rgba(0,150,220,0.3) 40%, transparent 80%)',
+            transform:     'skewX(-15deg)',
+            background:    'linear-gradient(180deg, rgba(255,255,255,0.9) 0%, rgba(160,220,255,0.4) 35%, transparent 80%)',
             transformOrigin: 'top center',
           }}
         />

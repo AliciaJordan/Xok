@@ -15,13 +15,13 @@ const OPTION_LABELS = ['A', 'B', 'C', 'D']
 const TIME_PER_Q    = 20
 
 export default function Quiz() {
-  const [current,   setCurrent]   = useState(0)
-  const [selected,  setSelected]  = useState(null)
-  const [score,     setScore]     = useState(0)
-  const [xpEarned,  setXpEarned]  = useState(0)
-  const [finished,  setFinished]  = useState(false)
-  const [timeLeft,  setTimeLeft]  = useState(TIME_PER_Q)
-  const [streak,    setStreak]    = useState(0)
+  const [current,  setCurrent]  = useState(0)
+  const [selected, setSelected] = useState(null)
+  const [score,    setScore]    = useState(0)
+  const [xpEarned, setXpEarned] = useState(0)
+  const [finished, setFinished] = useState(false)
+  const [timeLeft, setTimeLeft] = useState(TIME_PER_Q)
+  const [streak,   setStreak]   = useState(0)
   const timerRef = useRef(null)
   const { recordQuiz } = useGame()
 
@@ -43,10 +43,9 @@ export default function Quiz() {
     if (selected !== null) return
     clearInterval(timerRef.current)
     setSelected(idx)
-    const correct = idx === q.answer
-    if (correct) {
-      const bonus   = streak >= 2 ? Math.floor(q.xp * 0.5) : 0
-      const gained  = q.xp + bonus
+    if (idx === q.answer) {
+      const bonus  = streak >= 2 ? Math.floor(q.xp * 0.5) : 0
+      const gained = q.xp + bonus
       setScore((s) => s + 1)
       setXpEarned((x) => x + gained)
       setStreak((s) => s + 1)
@@ -70,10 +69,10 @@ export default function Quiz() {
     setFinished(false); setStreak(0); setTimeLeft(TIME_PER_Q)
   }
 
-  const finalScore  = finished ? score : score + (selected === q?.answer ? 1 : 0)
-  const pct         = Math.round((finalScore / QUESTIONS.length) * 100)
-  const timePct     = (timeLeft / TIME_PER_Q) * 100
-  const timerColor  = timeLeft <= 5 ? '#f87171' : timeLeft <= 10 ? '#fbbf24' : '#00ff88'
+  const finalScore = finished ? score : score + (selected === q?.answer ? 1 : 0)
+  const pct        = Math.round((finalScore / QUESTIONS.length) * 100)
+  const timePct    = (timeLeft / TIME_PER_Q) * 100
+  const timerColor = timeLeft <= 5 ? '#c03030' : timeLeft <= 10 ? '#d08020' : '#20a060'
 
   if (finished) {
     return (
@@ -83,40 +82,33 @@ export default function Quiz() {
             {pct === 100 ? '🏆' : pct >= 71 ? '🦈' : pct >= 42 ? '🌊' : '🐡'}
           </div>
           <div>
-            <p className="holo-label">MISSION COMPLETE</p>
+            <p className="holo-label">Mission Complete</p>
             <p
               className="font-display text-5xl font-black mt-2"
-              style={{
-                background: 'linear-gradient(135deg, #fff, #22ccff)',
-                WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-              }}
+              style={{ color: '#0a3060' }}
             >
               {finalScore}/{QUESTIONS.length}
             </p>
             <p className="aero-subtitle mt-1">
-              {pct === 100 ? 'SHARK GENIUS — PERFECT SCORE!' : pct >= 71 ? 'MARINE EXPERT' : pct >= 42 ? 'REEF RANGER' : 'KEEP DIVING'}
+              {pct === 100 ? 'Shark Genius — Perfect Score!' : pct >= 71 ? 'Marine Expert' : pct >= 42 ? 'Reef Ranger' : 'Keep Diving'}
             </p>
           </div>
 
-          {/* Score bar */}
           <div className="vista-progress-track h-4">
             <div className="vista-progress-fill" style={{ width: `${pct}%` }} />
           </div>
 
-          {/* XP */}
           <div
-            className="flex items-center justify-between rounded-xl px-5 py-3"
-            style={{ background: 'rgba(0,255,136,0.08)', border: '1px solid rgba(0,255,136,0.3)' }}
+            className="flex items-center justify-between rounded-2xl px-5 py-3"
+            style={{ background: 'rgba(220,248,235,0.8)', border: '1px solid rgba(34,165,90,0.3)' }}
           >
-            <span className="terminal-text">XP EARNED THIS SESSION</span>
-            <span className="terminal-text font-black text-xl">+{xpEarned}</span>
+            <span style={{ color: '#1a7040', fontSize: '0.78rem', fontWeight: 600 }}>XP Earned This Session</span>
+            <span style={{ color: '#18803a', fontSize: '1.3rem', fontWeight: 900, fontFamily: 'Nunito, sans-serif' }}>+{xpEarned}</span>
           </div>
 
-          <div className="flex gap-3">
-            <button onClick={restart} className="btn-aqua flex-1 justify-center">
-              ↺ PLAY AGAIN
-            </button>
-          </div>
+          <button onClick={restart} className="btn-aqua w-full justify-center">
+            ↺ Play Again
+          </button>
         </div>
       </div>
     )
@@ -125,50 +117,52 @@ export default function Quiz() {
   return (
     <div className="mx-auto max-w-2xl px-4 py-8 sm:px-6 space-y-5">
 
-      {/* Header HUD */}
+      {/* HUD */}
       <div className="aero-panel p-4">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <div>
-              <p className="holo-label">QUESTION</p>
-              <p className="font-display font-black text-xl text-white">{current + 1} / {QUESTIONS.length}</p>
+              <p className="holo-label">Question</p>
+              <p className="font-display font-black text-xl" style={{ color: '#0a3060' }}>{current + 1} / {QUESTIONS.length}</p>
             </div>
             <div>
-              <p className="holo-label">SCORE</p>
-              <p className="font-display font-black text-xl" style={{ color: '#22ccff' }}>{score}</p>
+              <p className="holo-label">Score</p>
+              <p className="font-display font-black text-xl" style={{ color: '#1878c8' }}>{score}</p>
             </div>
             {streak >= 2 && (
               <div
                 className="px-3 py-1 rounded-full"
-                style={{ background: 'rgba(251,191,36,0.15)', border: '1px solid rgba(251,191,36,0.4)' }}
+                style={{ background: 'rgba(255,245,210,0.85)', border: '1px solid rgba(217,119,6,0.35)' }}
               >
-                <p className="text-xs font-bold" style={{ color: '#fbbf24', fontFamily: 'Courier New', letterSpacing: '0.05em' }}>
-                  🔥 {streak}× STREAK
+                <p className="text-xs font-bold" style={{ color: '#b45309', letterSpacing: '0.05em' }}>
+                  🔥 {streak}× Streak
                 </p>
               </div>
             )}
           </div>
           <div className="text-right">
-            <p className="holo-label">TIME</p>
+            <p className="holo-label">Time</p>
             <p
               className="font-mono font-black text-2xl"
-              style={{ color: timerColor, textShadow: `0 0 12px ${timerColor}80` }}
+              style={{ color: timerColor }}
             >
               {String(timeLeft).padStart(2, '0')}
             </p>
           </div>
         </div>
 
-        {/* Time bar */}
+        {/* Timer bar */}
         <div className="mt-3 vista-progress-track h-2">
           <div
             className="h-full rounded-full transition-all duration-1000 linear"
             style={{
               width: `${timePct}%`,
               background: `linear-gradient(90deg, ${timerColor}88, ${timerColor})`,
-              boxShadow: `0 0 8px ${timerColor}60`,
+              position: 'relative',
             }}
-          />
+          >
+            <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '50%', background: 'rgba(255,255,255,0.4)', borderRadius: 999 }} />
+          </div>
         </div>
       </div>
 
@@ -182,16 +176,16 @@ export default function Quiz() {
               className="rounded-full transition-all duration-300"
               style={{
                 width:  i === current ? 20 : 8, height: 8,
-                background: i < current ? '#22ccff' : i === current ? '#00ff88' : 'rgba(0,100,160,0.3)',
-                boxShadow:  i === current ? '0 0 8px #00ff88' : 'none',
+                background: i < current ? '#1878c8' : i === current ? '#22a55a' : 'rgba(160,200,240,0.4)',
+                boxShadow:  i === current ? '0 0 6px rgba(34,165,90,0.5)' : 'none',
               }}
             />
           ))}
         </div>
 
         <p
-          className="font-display font-bold text-lg text-white leading-snug text-center"
-          style={{ textShadow: '0 0 20px rgba(0,200,255,0.2)' }}
+          className="font-display font-bold text-lg leading-snug text-center"
+          style={{ color: '#0a3060' }}
         >
           {q.q}
         </p>
@@ -202,15 +196,14 @@ export default function Quiz() {
             const isSelected = idx === selected
             const showResult = selected !== null
 
-            let borderColor = 'rgba(0,100,180,0.3)'
-            let bgColor     = 'rgba(0,15,40,0.7)'
-            let textColor   = 'rgba(160,210,240,0.85)'
-            let glowColor   = 'none'
+            let bg     = 'rgba(255,255,255,0.75)'
+            let border = 'rgba(160,210,240,0.5)'
+            let color  = '#1a4060'
 
             if (showResult) {
-              if (isAnswer)         { borderColor = '#00ff88'; bgColor = 'rgba(0,255,136,0.08)'; textColor = '#00ff88'; glowColor = '0 0 15px rgba(0,255,136,0.25)' }
-              else if (isSelected)  { borderColor = '#f87171'; bgColor = 'rgba(248,113,113,0.08)'; textColor = '#f87171'; glowColor = '0 0 15px rgba(248,113,113,0.2)' }
-              else                  { textColor = 'rgba(100,140,180,0.35)' }
+              if (isAnswer)        { bg = 'rgba(220,250,235,0.9)'; border = 'rgba(34,165,90,0.55)'; color = '#18703a' }
+              else if (isSelected) { bg = 'rgba(255,220,220,0.9)'; border = 'rgba(192,48,48,0.45)'; color = '#902020' }
+              else                 { color = 'rgba(100,140,180,0.6)' }
             }
 
             return (
@@ -218,17 +211,21 @@ export default function Quiz() {
                 key={idx}
                 onClick={() => choose(idx)}
                 disabled={selected !== null}
-                className="w-full text-left rounded-xl px-4 py-3 flex items-center gap-3 transition-all duration-200 disabled:cursor-default"
-                style={{ border: `1px solid ${borderColor}`, background: bgColor, boxShadow: glowColor, color: textColor }}
+                className="w-full text-left rounded-2xl px-4 py-3 flex items-center gap-3 transition-all duration-200 disabled:cursor-default"
+                style={{
+                  border: `1px solid ${border}`,
+                  background: bg,
+                  color,
+                  boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.8)',
+                }}
               >
                 <span
                   className="flex-shrink-0 rounded-full flex items-center justify-center text-xs font-black"
                   style={{
                     width: 28, height: 28,
-                    background: showResult && isAnswer ? '#00ff8820' : 'rgba(0,60,120,0.5)',
-                    border: `1px solid ${borderColor}`,
-                    fontFamily: 'Courier New, monospace',
-                    color: textColor,
+                    background: showResult && isAnswer ? 'rgba(34,165,90,0.15)' : 'rgba(255,255,255,0.7)',
+                    border: `1px solid ${border}`,
+                    color,
                   }}
                 >
                   {OPTION_LABELS[idx]}
@@ -244,14 +241,14 @@ export default function Quiz() {
         {/* Fact reveal */}
         {selected !== null && (
           <div
-            className="rounded-xl p-4 animate-fade-in-up"
-            style={{ background: 'rgba(0,200,255,0.05)', border: '1px solid rgba(0,200,255,0.2)' }}
+            className="rounded-2xl p-4 animate-fade-in-up"
+            style={{ background: 'rgba(220,242,255,0.8)', border: '1px solid rgba(160,210,240,0.5)' }}
           >
-            <p className="holo-label mb-1.5">◈ SPECIMEN FACT</p>
-            <p className="text-aqua-200 text-sm leading-relaxed">{q.fact}</p>
+            <p className="holo-label mb-1.5">🌊 Ocean Fact</p>
+            <p style={{ color: '#1a5080', fontSize: '0.85rem', lineHeight: 1.55 }}>{q.fact}</p>
             {streak >= 2 && selected === q.answer && (
-              <p className="terminal-text mt-2" style={{ fontSize: '0.65rem' }}>
-                🔥 STREAK BONUS: +{Math.floor(q.xp * 0.5)} XP
+              <p style={{ color: '#18803a', fontSize: '0.68rem', marginTop: '0.5rem', fontWeight: 600 }}>
+                🔥 Streak Bonus: +{Math.floor(q.xp * 0.5)} XP
               </p>
             )}
           </div>
@@ -259,7 +256,7 @@ export default function Quiz() {
 
         {selected !== null && (
           <button onClick={next} className="btn-aqua w-full justify-center">
-            {current + 1 >= QUESTIONS.length ? '◈ VIEW RESULTS' : 'NEXT QUESTION →'}
+            {current + 1 >= QUESTIONS.length ? '🏆 View Results' : 'Next Question →'}
           </button>
         )}
       </div>

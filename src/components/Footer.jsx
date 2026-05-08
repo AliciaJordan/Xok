@@ -8,8 +8,8 @@ export default function Footer() {
     <footer
       className="relative z-10 mt-auto"
       style={{
-        background: 'linear-gradient(180deg, transparent, rgba(0,10,30,0.9))',
-        borderTop: '1px solid rgba(0,176,232,0.2)',
+        background: 'linear-gradient(180deg, transparent, rgba(160,220,255,0.3))',
+        borderTop: '1px solid rgba(255,255,255,0.6)',
       }}
     >
       <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6">
@@ -17,18 +17,22 @@ export default function Footer() {
 
           {/* System status bar */}
           <div
-            className="flex items-center gap-4 rounded-xl px-4 py-2"
-            style={{ background: 'rgba(0,15,40,0.7)', border: '1px solid rgba(0,176,232,0.2)' }}
+            className="flex items-center gap-4 rounded-2xl px-4 py-2"
+            style={{
+              background: 'rgba(255,255,255,0.65)',
+              border: '1px solid rgba(255,255,255,0.9)',
+              boxShadow: '0 2px 8px rgba(30,100,180,0.1), inset 0 1px 0 rgba(255,255,255,0.9)',
+            }}
           >
             <div className="flex items-center gap-1.5">
-              <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: '#00ff88', boxShadow: '0 0 6px #00ff88' }} />
-              <span className="terminal-text" style={{ fontSize: '0.6rem' }}>SYSTEM ONLINE</span>
+              <div className="w-2 h-2 rounded-full" style={{ background: '#22a55a', boxShadow: '0 0 5px rgba(34,165,90,0.5)' }} />
+              <span className="holo-label">System Online</span>
             </div>
-            <div className="h-3 w-px" style={{ background: 'rgba(0,255,100,0.2)' }} />
-            <span className="holo-label">LVL {level}</span>
+            <div className="h-3 w-px" style={{ background: 'rgba(100,180,230,0.4)' }} />
+            <span className="holo-label">Lv {level}</span>
             <span className="holo-label">{xp} XP</span>
-            <span className="holo-label">{scansCompleted} SCANS</span>
-            <span className="holo-label">{speciesDiscovered.length}/15 SPECIES</span>
+            <span className="holo-label">{scansCompleted} Scans</span>
+            <span className="holo-label">{speciesDiscovered.length}/15 Species</span>
           </div>
 
           {/* Links */}
@@ -40,18 +44,18 @@ export default function Footer() {
               <Link
                 key={to}
                 to={to}
-                className="text-xs font-medium transition-colors"
-                style={{ color: 'rgba(120,200,255,0.6)' }}
-                onMouseEnter={(e) => e.target.style.color = '#70e0ff'}
-                onMouseLeave={(e) => e.target.style.color = 'rgba(120,200,255,0.6)'}
+                className="text-xs font-semibold transition-colors"
+                style={{ color: '#3070a0' }}
+                onMouseEnter={(e) => e.target.style.color = '#105080'}
+                onMouseLeave={(e) => e.target.style.color = '#3070a0'}
               >
                 {label}
               </Link>
             ))}
           </nav>
 
-          <p className="holo-label" style={{ fontSize: '0.55rem', opacity: 0.5 }}>
-            XOK MARINE OS © {new Date().getFullYear()}
+          <p className="holo-label" style={{ fontSize: '0.55rem', opacity: 0.6 }}>
+            XOK Marine OS © {new Date().getFullYear()}
           </p>
         </div>
       </div>

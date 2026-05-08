@@ -5,10 +5,10 @@ import RarityBadge from '@/components/aero/RarityBadge'
 
 const ALL_RARITIES  = ['All', 'Common', 'Uncommon', 'Rare', 'Epic', 'Legendary']
 const STATUS_COLOR  = {
-  'Least Concern': '#34d399', 'Near Threatened': '#22ccff',
-  'Vulnerable': '#fbbf24', 'Endangered': '#fb923c', 'Critically Endangered': '#f87171',
+  'Least Concern': '#20a060', 'Near Threatened': '#1878c8',
+  'Vulnerable': '#d08020', 'Endangered': '#c05820', 'Critically Endangered': '#c03030',
 }
-const DANGER_COLOR  = { Low: '#34d399', Medium: '#fbbf24', High: '#f87171' }
+const DANGER_COLOR  = { Low: '#20a060', Medium: '#d08020', High: '#c03030' }
 
 export default function XokDex() {
   const [query,   setQuery]   = useState('')
@@ -28,21 +28,19 @@ export default function XokDex() {
 
       {/* Header */}
       <div className="aero-panel p-6 text-center">
-        <p className="holo-label">XOKDEX — SPECIES DATABASE</p>
+        <p className="holo-label">XokDex — Species Database</p>
         <h1
           className="font-display text-4xl md:text-5xl font-black mt-1"
           style={{
-            background: 'linear-gradient(135deg, #ffffff 0%, #70e0ff 50%, #22ccff 100%)',
+            background: 'linear-gradient(135deg, #0050a0 0%, #0090d8 50%, #30b8f0 100%)',
             WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
-            filter: 'drop-shadow(0 0 20px rgba(0,200,255,0.4))',
           }}
         >
-          SHARKDEX
+          SharkDex
         </h1>
         <p className="aero-subtitle text-sm mt-1">
           {speciesDiscovered.length} / {SHARK_CLASSES.length} species discovered
         </p>
-        {/* Discovery progress */}
         <div className="mt-4 max-w-xs mx-auto vista-progress-track h-3">
           <div className="vista-progress-fill" style={{ width: `${(speciesDiscovered.length / SHARK_CLASSES.length) * 100}%` }} />
         </div>
@@ -55,11 +53,12 @@ export default function XokDex() {
           placeholder="Search species or Latin name..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
-          className="flex-1 rounded-xl px-4 py-2.5 text-sm text-white placeholder:text-aqua-800 focus:outline-none"
+          className="flex-1 rounded-2xl px-4 py-2.5 text-sm focus:outline-none"
           style={{
-            background: 'rgba(0,15,40,0.8)',
-            border: '1px solid rgba(0,176,232,0.3)',
-            fontFamily: 'Inter, sans-serif',
+            background: 'rgba(255,255,255,0.75)',
+            border: '1px solid rgba(160,210,240,0.5)',
+            color: '#0a3060',
+            boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.8)',
           }}
         />
         <div className="flex gap-2 flex-wrap">
@@ -69,14 +68,18 @@ export default function XokDex() {
               onClick={() => setRarity(r)}
               className="rounded-full px-3 py-1.5 text-xs font-bold transition-all"
               style={{
-                fontFamily: 'Courier New, monospace',
-                letterSpacing: '0.05em',
-                background: rarity === r ? 'rgba(0,176,232,0.3)' : 'rgba(0,15,40,0.6)',
-                border: rarity === r ? '1px solid rgba(0,200,255,0.6)' : '1px solid rgba(0,100,160,0.3)',
-                color: rarity === r ? '#70e0ff' : 'rgba(100,160,200,0.6)',
+                background: rarity === r
+                  ? 'linear-gradient(180deg, #5ab0e8 0%, #2888c8 100%)'
+                  : 'rgba(255,255,255,0.7)',
+                border: rarity === r ? '1px solid rgba(80,160,230,0.5)' : '1px solid rgba(160,210,240,0.4)',
+                color: rarity === r ? 'white' : '#2060a0',
+                boxShadow: rarity === r
+                  ? '0 2px 8px rgba(0,120,200,0.25), inset 0 1px 0 rgba(255,255,255,0.35)'
+                  : 'inset 0 1px 0 rgba(255,255,255,0.8)',
+                textShadow: rarity === r ? '0 1px 2px rgba(0,60,120,0.3)' : 'none',
               }}
             >
-              {r.toUpperCase()}
+              {r}
             </button>
           ))}
         </div>
@@ -85,7 +88,7 @@ export default function XokDex() {
       {/* Grid */}
       {filtered.length === 0 ? (
         <div className="aero-panel p-12 text-center">
-          <p className="terminal-text" style={{ fontSize: '0.8rem' }}>NO SPECIMENS FOUND IN DATABASE</p>
+          <p style={{ color: '#3a6890', fontSize: '0.85rem' }}>No specimens found in database</p>
         </div>
       ) : (
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -117,14 +120,15 @@ export default function XokDex() {
                   >
                     <div className="flex items-start justify-between">
                       <div
-                        className="rounded-2xl flex items-center justify-center text-4xl"
+                        className="rounded-2xl flex items-center justify-center text-3xl"
                         style={{
-                          width: 56, height: 56,
+                          width: 52, height: 52,
                           background: discovered
-                            ? 'linear-gradient(135deg, rgba(0,80,140,0.6), rgba(0,40,80,0.8))'
-                            : 'rgba(0,20,50,0.6)',
-                          border: discovered ? '1px solid rgba(0,176,232,0.4)' : '1px solid rgba(50,80,120,0.3)',
-                          filter: discovered ? 'none' : 'grayscale(1) brightness(0.3)',
+                            ? 'linear-gradient(135deg, rgba(200,238,255,0.9), rgba(160,215,248,0.7))'
+                            : 'rgba(220,235,248,0.5)',
+                          border: discovered ? '1px solid rgba(255,255,255,0.9)' : '1px solid rgba(200,220,240,0.5)',
+                          boxShadow: discovered ? '0 2px 8px rgba(30,100,180,0.12), inset 0 1px 0 rgba(255,255,255,0.8)' : 'none',
+                          filter: discovered ? 'none' : 'grayscale(0.6) opacity(0.5)',
                         }}
                       >
                         🦈
@@ -135,24 +139,27 @@ export default function XokDex() {
                     <div className="flex-1 min-w-0">
                       <p
                         className="font-display font-extrabold text-base leading-tight"
-                        style={{ color: discovered ? '#fff' : 'rgba(100,140,180,0.5)', filter: discovered ? 'none' : 'blur(0px)' }}
+                        style={{ color: discovered ? '#0a3060' : '#7a9ab8' }}
                       >
                         {s.name}
                       </p>
-                      <p className="text-xs italic mt-0.5" style={{ color: 'rgba(100,160,200,0.5)' }}>{s.latin}</p>
+                      <p className="text-xs italic mt-0.5" style={{ color: '#5a88a8' }}>{s.latin}</p>
                     </div>
 
                     <div className="flex items-center justify-between">
-                      <div className="flex gap-1.5">
-                        <span
-                          className="text-xs px-2 py-0.5 rounded-full"
-                          style={{ background: `${DANGER_COLOR[s.danger]}20`, border: `1px solid ${DANGER_COLOR[s.danger]}40`, color: DANGER_COLOR[s.danger], fontFamily: 'Courier New', fontSize: '0.6rem' }}
-                        >
-                          {s.danger}
-                        </span>
-                      </div>
-                      <span className="terminal-text-dim" style={{ fontSize: '0.55rem' }}>
-                        {discovered ? '✓ CATALOGUED · TAP FOR DATA' : '◈ NOT YET IDENTIFIED'}
+                      <span
+                        className="text-xs px-2 py-0.5 rounded-full font-semibold"
+                        style={{
+                          background: `${DANGER_COLOR[s.danger]}18`,
+                          border: `1px solid ${DANGER_COLOR[s.danger]}40`,
+                          color: DANGER_COLOR[s.danger],
+                          fontSize: '0.62rem',
+                        }}
+                      >
+                        {s.danger}
+                      </span>
+                      <span style={{ color: '#6a9ab8', fontSize: '0.55rem', fontWeight: 600 }}>
+                        {discovered ? '✓ Catalogued · Tap for data' : 'Not yet identified'}
                       </span>
                     </div>
                   </div>
@@ -166,21 +173,28 @@ export default function XokDex() {
                       transform: 'rotateY(180deg)',
                     }}
                   >
-                    <p className="holo-label text-center">{s.name.toUpperCase()}</p>
+                    <p className="holo-label text-center">{s.name}</p>
                     <div className="grid grid-cols-2 gap-1.5 flex-1">
                       {[
-                        { l: 'DEPTH',  v: s.depth,  c: '#22ccff' },
-                        { l: 'DANGER', v: s.danger,  c: DANGER_COLOR[s.danger] },
-                        { l: 'XP',     v: `+${s.xpReward}`, c: '#00ff88' },
-                        { l: 'STATUS', v: s.status.split(' ').slice(-1)[0], c: STATUS_COLOR[s.status] ?? '#70e0ff' },
+                        { l: 'Depth',  v: s.depth,  c: '#1878c8' },
+                        { l: 'Danger', v: s.danger,  c: DANGER_COLOR[s.danger] },
+                        { l: 'XP',     v: `+${s.xpReward}`, c: '#22a55a' },
+                        { l: 'Status', v: s.status.split(' ').slice(-1)[0], c: STATUS_COLOR[s.status] ?? '#2a6090' },
                       ].map(({ l, v, c }) => (
-                        <div key={l} className="rounded-lg p-2" style={{ background: 'rgba(0,20,50,0.7)', border: '1px solid rgba(0,100,180,0.2)' }}>
+                        <div
+                          key={l}
+                          className="rounded-xl p-2"
+                          style={{
+                            background: 'rgba(255,255,255,0.6)',
+                            border: '1px solid rgba(255,255,255,0.8)',
+                          }}
+                        >
                           <p className="holo-label" style={{ fontSize: '0.48rem' }}>{l}</p>
                           <p className="text-xs font-bold mt-0.5 truncate" style={{ color: c }}>{v}</p>
                         </div>
                       ))}
                     </div>
-                    <p className="text-aqua-300 leading-relaxed" style={{ fontSize: '0.62rem', lineHeight: 1.5 }}>
+                    <p style={{ color: '#2a5878', fontSize: '0.62rem', lineHeight: 1.5 }}>
                       {s.fact?.substring(0, 90)}{s.fact?.length > 90 ? '...' : ''}
                     </p>
                   </div>
@@ -191,8 +205,8 @@ export default function XokDex() {
         </div>
       )}
 
-      <p className="terminal-text-dim text-center" style={{ fontSize: '0.6rem' }}>
-        SHOWING {filtered.length} / {SHARK_CLASSES.length} DATABASE ENTRIES — TAP CARD TO FLIP
+      <p className="text-center holo-label" style={{ fontSize: '0.58rem', opacity: 0.65 }}>
+        Showing {filtered.length} / {SHARK_CLASSES.length} species · Tap card to flip
       </p>
     </div>
   )

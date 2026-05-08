@@ -3,20 +3,27 @@
 @tailwind utilities;
 
 /* ═══════════════════════════════════════════════════════════════
-   BASE — Frutiger Aero / Vista Aqua ocean OS aesthetic
+   BASE — Frutiger Aero / Vista Aqua — bright oceanic OS
    ═══════════════════════════════════════════════════════════════ */
 @layer base {
   html { @apply scroll-smooth; }
 
   body {
-    background: linear-gradient(180deg, #000f40 0%, #002040 25%, #003358 55%, #005070 100%);
+    background: linear-gradient(180deg,
+      #c8eeff 0%,
+      #a0d8f8 15%,
+      #7ec8f0 35%,
+      #5ab0e8 60%,
+      #3090d0 85%,
+      #1870b8 100%
+    );
     min-height: 100vh;
-    @apply text-white font-sans antialiased;
+    @apply text-slate-800 font-sans antialiased;
   }
 
   ::-webkit-scrollbar       { @apply w-2; }
-  ::-webkit-scrollbar-track { background: rgba(0,20,50,0.8); }
-  ::-webkit-scrollbar-thumb { background: linear-gradient(180deg,#00b0e8,#005d84); border-radius: 999px; }
+  ::-webkit-scrollbar-track { background: rgba(160,216,248,0.3); }
+  ::-webkit-scrollbar-thumb { background: linear-gradient(180deg,#5ab0e8,#2880c0); border-radius: 999px; }
 
   * { box-sizing: border-box; }
 }
@@ -26,52 +33,73 @@
    ═══════════════════════════════════════════════════════════════ */
 @layer components {
 
+  /* Main glass panel — bright, white, translucent */
   .aero-panel {
-    background: linear-gradient(145deg,
-      rgba(255,255,255,0.18) 0%,
-      rgba(100,200,255,0.07) 50%,
-      rgba(0,80,160,0.12) 100%
+    background: linear-gradient(160deg,
+      rgba(255,255,255,0.78) 0%,
+      rgba(220,242,255,0.55) 50%,
+      rgba(180,228,255,0.45) 100%
     );
-    border: 1px solid rgba(255,255,255,0.32);
-    border-bottom-color: rgba(255,255,255,0.12);
-    border-right-color:  rgba(255,255,255,0.12);
-    backdrop-filter: blur(24px) saturate(200%);
-    -webkit-backdrop-filter: blur(24px) saturate(200%);
+    border: 1px solid rgba(255,255,255,0.9);
+    border-bottom-color: rgba(160,210,240,0.5);
+    border-right-color:  rgba(160,210,240,0.5);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
     box-shadow:
-      0 8px 32px rgba(0,40,100,0.45),
-      0 0 0 1px rgba(255,255,255,0.08),
-      inset 0 1px 0 rgba(255,255,255,0.55),
-      inset 0 -1px 0 rgba(0,100,200,0.18);
-    border-radius: 1.25rem;
+      0 8px 32px rgba(30,100,180,0.18),
+      0 2px 8px  rgba(30,100,180,0.1),
+      inset 0 1px 0 rgba(255,255,255,0.95),
+      inset 0 -1px 0 rgba(100,180,230,0.15);
+    border-radius: 1.5rem;
     position: relative;
     overflow: hidden;
   }
 
-  /* Top gloss strip — the defining Aqua hallmark */
+  /* Top gloss strip — the Aqua OS hallmark */
   .aero-panel::before {
     content: '';
     position: absolute;
     top: 0; left: 0; right: 0;
-    height: 38%;
-    background: linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 100%);
+    height: 42%;
+    background: linear-gradient(180deg,
+      rgba(255,255,255,0.65) 0%,
+      rgba(255,255,255,0.08) 100%
+    );
     pointer-events: none;
-    border-radius: 1.25rem 1.25rem 0 0;
+    border-radius: 1.5rem 1.5rem 0 0;
   }
 
   .aero-panel-glow {
     box-shadow:
-      0 0 50px rgba(0,176,232,0.3),
-      0 8px 32px rgba(0,40,100,0.5),
-      inset 0 1px 0 rgba(255,255,255,0.55);
+      0 0 40px rgba(60,160,255,0.25),
+      0 8px 32px rgba(30,100,180,0.2),
+      inset 0 1px 0 rgba(255,255,255,0.95);
   }
 
+  /* Slightly darker glass for secondary panels */
   .aero-panel-dark {
-    background: linear-gradient(145deg, rgba(0,15,40,0.92) 0%, rgba(0,30,70,0.88) 100%);
-    border: 1px solid rgba(0,176,232,0.25);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.6), inset 0 1px 0 rgba(0,176,232,0.15);
-    border-radius: 1.25rem;
+    background: linear-gradient(160deg,
+      rgba(200,232,255,0.60) 0%,
+      rgba(160,210,248,0.40) 100%
+    );
+    border: 1px solid rgba(255,255,255,0.75);
+    backdrop-filter: blur(20px) saturate(160%);
+    -webkit-backdrop-filter: blur(20px) saturate(160%);
+    box-shadow:
+      0 6px 24px rgba(30,100,180,0.15),
+      inset 0 1px 0 rgba(255,255,255,0.8);
+    border-radius: 1.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .aero-panel-dark::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 38%;
+    background: linear-gradient(180deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 100%);
+    pointer-events: none;
+    border-radius: 1.5rem 1.5rem 0 0;
   }
 
   /* ── AQUA GLOSSY BUTTONS ── */
@@ -87,18 +115,18 @@
     font-size: 0.875rem;
     letter-spacing: 0.02em;
     color: white;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    text-shadow: 0 1px 3px rgba(0,60,140,0.5);
     background: linear-gradient(180deg,
       #8ee8ff 0%, #2bc4f0 38%, #0096d0 50%, #00b4e8 68%, #0084c0 100%
     );
-    border: 1px solid rgba(0,160,240,0.7);
+    border: 1px solid rgba(0,140,220,0.6);
     box-shadow:
-      0 0 20px rgba(0,200,255,0.35),
-      0 4px 12px rgba(0,0,0,0.3),
-      inset 0 1px 0 rgba(255,255,255,0.8),
-      inset 0 -1px 0 rgba(0,60,120,0.3);
+      0 4px 16px rgba(0,140,220,0.35),
+      0 1px 4px  rgba(0,0,0,0.15),
+      inset 0 1px 0 rgba(255,255,255,0.85),
+      inset 0 -1px 0 rgba(0,80,160,0.2);
     overflow: hidden;
-    transition: all 0.15s ease;
+    transition: all 0.18s ease;
     cursor: pointer;
     white-space: nowrap;
   }
@@ -107,7 +135,7 @@
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 52%;
-    background: linear-gradient(180deg, rgba(255,255,255,0.65) 0%, rgba(255,255,255,0.08) 100%);
+    background: linear-gradient(180deg, rgba(255,255,255,0.72) 0%, rgba(255,255,255,0.06) 100%);
     border-radius: 9999px 9999px 0 0;
     pointer-events: none;
   }
@@ -116,18 +144,15 @@
       #a4f0ff 0%, #40d4ff 38%, #00aae0 50%, #00c8ff 68%, #0096d8 100%
     );
     box-shadow:
-      0 0 30px rgba(0,210,255,0.55),
-      0 4px 16px rgba(0,0,0,0.25),
-      inset 0 1px 0 rgba(255,255,255,0.9);
+      0 6px 24px rgba(0,180,255,0.45),
+      0 2px 8px  rgba(0,0,0,0.12),
+      inset 0 1px 0 rgba(255,255,255,0.92);
     transform: translateY(-1px);
   }
   .btn-aqua:active { transform: translateY(0); }
   .btn-aqua:disabled { opacity: 0.45; cursor: not-allowed; transform: none; }
 
-  .btn-aqua-sm {
-    padding: 0.4rem 1rem;
-    font-size: 0.75rem;
-  }
+  .btn-aqua-sm { padding: 0.4rem 1rem; font-size: 0.75rem; }
 
   .btn-aqua-outline {
     position: relative;
@@ -139,78 +164,56 @@
     border-radius: 9999px;
     font-weight: 600;
     font-size: 0.875rem;
-    color: #70e0ff;
-    background: rgba(0,176,232,0.08);
-    border: 1px solid rgba(0,176,232,0.5);
-    box-shadow: 0 0 12px rgba(0,176,232,0.15), inset 0 1px 0 rgba(255,255,255,0.1);
-    transition: all 0.15s ease;
+    color: #0070b0;
+    background: rgba(255,255,255,0.55);
+    border: 1px solid rgba(0,140,220,0.4);
+    box-shadow:
+      0 2px 8px rgba(0,120,200,0.12),
+      inset 0 1px 0 rgba(255,255,255,0.8);
+    transition: all 0.18s ease;
     cursor: pointer;
     white-space: nowrap;
   }
   .btn-aqua-outline:hover {
-    background: rgba(0,176,232,0.18);
-    border-color: rgba(0,200,255,0.7);
-    box-shadow: 0 0 20px rgba(0,200,255,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
-    color: #b3efff;
+    background: rgba(255,255,255,0.75);
+    border-color: rgba(0,160,240,0.65);
+    box-shadow: 0 4px 16px rgba(0,160,240,0.22), inset 0 1px 0 rgba(255,255,255,0.9);
+    color: #005090;
+    transform: translateY(-1px);
   }
 
-  /* ── SONAR / TERMINAL ── */
-  .sonar-screen {
-    background: radial-gradient(circle at center, #001a0d 0%, #000d07 70%, #000804 100%);
-    border: 2px solid rgba(0,255,100,0.25);
+  /* ── OCEAN OBSERVATION PANEL (replaces sonar-screen dark terminal) ── */
+  .ocean-panel {
+    background: linear-gradient(160deg,
+      rgba(220,240,255,0.85) 0%,
+      rgba(180,225,255,0.70) 100%
+    );
+    border: 1.5px solid rgba(255,255,255,0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     box-shadow:
-      0 0 40px rgba(0,200,80,0.12),
-      inset 0 0 40px rgba(0,80,30,0.12),
-      inset 0 0 4px rgba(0,255,100,0.08);
+      0 6px 24px rgba(30,100,180,0.15),
+      inset 0 1px 0 rgba(255,255,255,0.9),
+      inset 0 0 40px rgba(160,220,255,0.08);
     position: relative;
     overflow: hidden;
   }
 
-  .scanlines::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      0deg,
-      transparent 0, transparent 2px,
-      rgba(0,0,0,0.12) 2px, rgba(0,0,0,0.12) 4px
-    );
-    pointer-events: none;
-    z-index: 10;
-  }
-
-  .terminal-text {
-    color: #00ff88;
-    font-family: 'Courier New', Courier, monospace;
-    text-shadow: 0 0 8px rgba(0,255,136,0.55);
-    font-size: 0.7rem;
-    line-height: 1.6;
-  }
-
-  .terminal-text-dim {
-    color: #00cc66;
-    font-family: 'Courier New', Courier, monospace;
-    text-shadow: 0 0 5px rgba(0,204,102,0.3);
-    font-size: 0.65rem;
-    line-height: 1.6;
-    opacity: 0.7;
-  }
-
   /* ── VISTA PROGRESS BAR ── */
   .vista-progress-track {
-    background: rgba(0,20,50,0.7);
-    border: 1px solid rgba(0,100,180,0.4);
+    background: rgba(180,220,255,0.35);
+    border: 1px solid rgba(100,180,230,0.3);
     border-radius: 9999px;
     overflow: hidden;
-    box-shadow: inset 0 2px 4px rgba(0,0,0,0.4);
+    box-shadow: inset 0 1px 3px rgba(0,80,160,0.12);
   }
   .vista-progress-fill {
     height: 100%;
-    background: linear-gradient(90deg, #00b0e8, #22ccff, #00b0e8);
+    background: linear-gradient(90deg, #5ab0e8, #22ccff, #5ab0e8);
     background-size: 200% 100%;
-    animation: progress-shimmer 2s linear infinite;
+    animation: progress-shimmer 2.5s linear infinite;
     border-radius: 9999px;
-    box-shadow: 0 0 10px rgba(0,200,255,0.5);
+    box-shadow: 0 0 8px rgba(0,180,255,0.35);
     position: relative;
   }
   .vista-progress-fill::after {
@@ -218,7 +221,7 @@
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 50%;
-    background: linear-gradient(180deg, rgba(255,255,255,0.45) 0%, transparent 100%);
+    background: linear-gradient(180deg, rgba(255,255,255,0.55) 0%, transparent 100%);
     border-radius: 9999px;
   }
   @keyframes progress-shimmer {
@@ -226,105 +229,108 @@
     to   { background-position: -200% 0; }
   }
 
-  /* ── SECTION TITLE STYLES ── */
+  /* ── TYPOGRAPHY ── */
   .aero-title {
     font-family: 'Nunito', sans-serif;
     font-weight: 900;
-    background: linear-gradient(135deg, #f0faff 0%, #70e0ff 50%, #22ccff 100%);
+    background: linear-gradient(135deg, #1060b0 0%, #0090d8 50%, #00b4f0 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    filter: drop-shadow(0 0 20px rgba(0,200,255,0.4));
+    filter: drop-shadow(0 2px 8px rgba(0,140,220,0.25));
   }
 
   .aero-subtitle {
-    color: #b3efff;
-    font-size: 1.05rem;
-    margin-top: 0.5rem;
-    text-shadow: 0 0 12px rgba(0,180,220,0.3);
+    color: #2a6090;
+    font-size: 1rem;
+    margin-top: 0.4rem;
   }
 
-  /* ── XP / RARITY BADGES ── */
-  .rarity-common    { color: #94a3b8; border-color: rgba(148,163,184,0.4); background: rgba(148,163,184,0.1); }
-  .rarity-uncommon  { color: #22c55e; border-color: rgba(34,197,94,0.4);   background: rgba(34,197,94,0.1); }
-  .rarity-rare      { color: #60a5fa; border-color: rgba(96,165,250,0.4);  background: rgba(96,165,250,0.1); box-shadow: 0 0 8px rgba(59,130,246,0.3); }
-  .rarity-epic      { color: #c084fc; border-color: rgba(192,132,252,0.4); background: rgba(168,85,247,0.1); box-shadow: 0 0 10px rgba(168,85,247,0.35); }
-  .rarity-legendary { color: #fbbf24; border-color: rgba(251,191,36,0.5);  background: rgba(245,158,11,0.12); box-shadow: 0 0 15px rgba(245,158,11,0.5); animation: legendary-pulse 2s ease-in-out infinite; }
+  /* Ocean soft label — replaces harsh holo-label */
+  .holo-label {
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #2a7cb0;
+  }
+
+  /* Soft observation text — replaces green terminal-text */
+  .terminal-text {
+    color: #1a6090;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.7rem;
+    line-height: 1.6;
+  }
+  .terminal-text-dim {
+    color: #4a88b0;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.65rem;
+    line-height: 1.6;
+    opacity: 0.75;
+  }
+
+  /* ── RARITY BADGES ── */
+  .rarity-common    { color: #6b7a8d; border-color: rgba(107,122,141,0.4); background: rgba(240,244,248,0.8); }
+  .rarity-uncommon  { color: #22a55a; border-color: rgba(34,165,90,0.4);   background: rgba(220,250,235,0.8); }
+  .rarity-rare      { color: #3b82f6; border-color: rgba(59,130,246,0.4);  background: rgba(220,235,255,0.8); box-shadow: 0 0 8px rgba(59,130,246,0.2); }
+  .rarity-epic      { color: #9333ea; border-color: rgba(147,51,234,0.4);  background: rgba(240,220,255,0.8); box-shadow: 0 0 10px rgba(147,51,234,0.2); }
+  .rarity-legendary { color: #d97706; border-color: rgba(217,119,6,0.5);   background: rgba(255,245,210,0.85); box-shadow: 0 0 14px rgba(245,158,11,0.3); animation: legendary-pulse 2.5s ease-in-out infinite; }
 
   @keyframes legendary-pulse {
-    0%, 100% { box-shadow: 0 0 15px rgba(245,158,11,0.5); }
-    50%       { box-shadow: 0 0 25px rgba(245,158,11,0.8), 0 0 5px rgba(255,220,60,0.4); }
+    0%, 100% { box-shadow: 0 0 12px rgba(245,158,11,0.3); }
+    50%       { box-shadow: 0 0 22px rgba(245,158,11,0.55); }
   }
 
   /* ── NAV ── */
   .nav-aero {
     background: linear-gradient(180deg,
-      rgba(0,80,140,0.85) 0%,
-      rgba(0,50,100,0.92) 100%
+      rgba(255,255,255,0.82) 0%,
+      rgba(220,240,255,0.78) 100%
     );
-    border-bottom: 1px solid rgba(0,176,232,0.4);
-    backdrop-filter: blur(32px) saturate(200%);
-    -webkit-backdrop-filter: blur(32px) saturate(200%);
+    border-bottom: 1px solid rgba(160,210,240,0.5);
+    backdrop-filter: blur(32px) saturate(180%);
+    -webkit-backdrop-filter: blur(32px) saturate(180%);
     box-shadow:
-      0 4px 24px rgba(0,0,0,0.5),
-      0 1px 0 rgba(255,255,255,0.1) inset,
-      0 0 60px rgba(0,100,200,0.15);
+      0 4px 20px rgba(30,100,180,0.12),
+      inset 0 1px 0 rgba(255,255,255,0.95);
   }
 
   .nav-link-aero {
-    color: rgba(176,228,255,0.85);
+    color: #2060a0;
     font-size: 0.875rem;
     font-weight: 600;
     padding: 0.35rem 0.9rem;
     border-radius: 9999px;
     transition: all 0.15s ease;
-    position: relative;
-    letter-spacing: 0.02em;
+    letter-spacing: 0.01em;
   }
   .nav-link-aero:hover {
-    color: #fff;
-    background: rgba(0,176,232,0.18);
-    text-shadow: 0 0 12px rgba(0,200,255,0.6);
+    color: #003880;
+    background: rgba(100,180,240,0.18);
   }
   .nav-link-aero.active {
-    color: #fff;
-    background: rgba(0,176,232,0.28);
-    box-shadow: 0 0 15px rgba(0,200,255,0.25), inset 0 1px 0 rgba(255,255,255,0.2);
-    text-shadow: 0 0 15px rgba(0,220,255,0.7);
+    color: #003070;
+    background: rgba(100,180,240,0.28);
+    box-shadow: 0 2px 8px rgba(0,140,220,0.18), inset 0 1px 0 rgba(255,255,255,0.6);
   }
 
-  /* ── DIAGNOSTIC / HOLOGRAPHIC LABELS ── */
-  .holo-label {
-    font-size: 0.6rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #22ccff;
-    text-shadow: 0 0 6px rgba(0,200,255,0.6);
-  }
-
-  .danger-high   { color: #f87171; text-shadow: 0 0 8px rgba(248,113,113,0.5); }
-  .danger-medium { color: #fbbf24; text-shadow: 0 0 8px rgba(251,191,36,0.5); }
-  .danger-low    { color: #34d399; text-shadow: 0 0 8px rgba(52,211,153,0.5); }
+  /* ── DANGER COLORS ── */
+  .danger-high   { color: #e05050; }
+  .danger-medium { color: #d08020; }
+  .danger-low    { color: #20a060; }
 }
 
 /* ═══════════════════════════════════════════════════════════════
    UTILITIES
    ═══════════════════════════════════════════════════════════════ */
 @layer utilities {
-  .text-aqua-glow {
-    color: #70e0ff;
-    text-shadow: 0 0 15px rgba(0,200,255,0.55);
-  }
-  .text-sonar-glow {
-    color: #00ff88;
-    text-shadow: 0 0 10px rgba(0,255,136,0.6);
-  }
-  .glass-inset {
-    box-shadow: inset 0 2px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
-  }
+  .text-ocean-deep  { color: #1a5080; }
+  .text-ocean-mid   { color: #2a7cb0; }
+  .text-ocean-light { color: #5ab0e8; }
+  .glass-inset      { box-shadow: inset 0 2px 8px rgba(0,80,160,0.1), inset 0 1px 0 rgba(255,255,255,0.5); }
   .chrome-border {
     border: 1px solid;
-    border-color: rgba(255,255,255,0.4) rgba(255,255,255,0.1) rgba(255,255,255,0.1) rgba(255,255,255,0.4);
+    border-color: rgba(255,255,255,0.85) rgba(180,220,255,0.4) rgba(180,220,255,0.4) rgba(255,255,255,0.85);
   }
 }

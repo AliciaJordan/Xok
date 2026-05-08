@@ -30,9 +30,9 @@ export default function ImageUploader({ onImageReady, disabled }) {
         style={{
           cursor: preview ? 'default' : disabled ? 'not-allowed' : 'pointer',
           borderRadius: '0.75rem',
-          border: `2px dashed ${dragging ? 'rgba(34,204,255,0.7)' : preview ? 'rgba(0,176,232,0.3)' : 'rgba(0,100,160,0.4)'}`,
-          background: dragging ? 'rgba(0,176,232,0.05)' : 'transparent',
-          opacity: disabled && !preview ? 0.4 : 1,
+          border: `2px dashed ${dragging ? 'rgba(58,150,224,0.7)' : preview ? 'rgba(100,180,240,0.4)' : 'rgba(160,210,240,0.5)'}`,
+          background: dragging ? 'rgba(200,238,255,0.3)' : 'transparent',
+          opacity: disabled && !preview ? 0.5 : 1,
         }}
       >
         {preview ? (
@@ -48,7 +48,12 @@ export default function ImageUploader({ onImageReady, disabled }) {
             <button
               onClick={(e) => { e.stopPropagation(); setPreview(null) }}
               className="absolute top-2 right-2 rounded-full w-6 h-6 flex items-center justify-center text-xs"
-              style={{ background: 'rgba(0,0,0,0.6)', border: '1px solid rgba(248,113,113,0.5)', color: '#f87171' }}
+              style={{
+                background: 'rgba(255,255,255,0.85)',
+                border: '1px solid rgba(192,48,48,0.4)',
+                color: '#c03030',
+                boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.9)',
+              }}
             >
               ✕
             </button>
@@ -57,18 +62,20 @@ export default function ImageUploader({ onImageReady, disabled }) {
           <div className="flex flex-col items-center gap-3 p-8 text-center select-none">
             <div
               className="rounded-full p-4"
-              style={{ background: 'rgba(0,100,160,0.2)', border: '1px solid rgba(0,176,232,0.3)' }}
+              style={{
+                background: 'rgba(255,255,255,0.75)',
+                border: '1px solid rgba(160,210,240,0.5)',
+                boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.9)',
+              }}
             >
-              <svg className="h-8 w-8" style={{ color: '#22ccff' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="h-8 w-8" style={{ color: '#3a96e0' }} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
                   d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
               </svg>
             </div>
             <div>
-              <p className="text-sm font-semibold" style={{ color: '#b3efff' }}>Drop specimen image here</p>
-              <p className="text-xs mt-1" style={{ color: 'rgba(100,160,200,0.5)', fontFamily: 'Courier New' }}>
-                OR CLICK TO BROWSE · PNG · JPG · WEBP
-              </p>
+              <p className="text-sm font-semibold" style={{ color: '#1a5080' }}>Drop specimen image here</p>
+              <p className="text-xs mt-1" style={{ color: '#6a9ab8' }}>or click to browse · PNG · JPG · WEBP</p>
             </div>
           </div>
         )}
