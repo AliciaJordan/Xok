@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply bg-ocean-950 text-white font-sans antialiased min-h-screen;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-ocean-950;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-ocean-700 rounded-full;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-ocean-500 hover:bg-ocean-400
+           text-white font-semibold text-sm transition-all duration-200
+           shadow-lg shadow-ocean-900/40 hover:shadow-ocean-500/30
+           focus:outline-none focus:ring-2 focus:ring-ocean-400 focus:ring-offset-2 focus:ring-offset-ocean-950;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-ocean-500
+           text-ocean-300 hover:bg-ocean-500/10 font-semibold text-sm transition-all duration-200
+           focus:outline-none focus:ring-2 focus:ring-ocean-400 focus:ring-offset-2 focus:ring-offset-ocean-950;
+  }
+
+  .card-ocean {
+    @apply rounded-2xl bg-ocean-900/60 border border-ocean-700/40 backdrop-blur-sm
+           shadow-xl shadow-ocean-950/50;
+  }
+
+  .section-title {
+    @apply font-display text-3xl md:text-4xl font-extrabold text-white;
+  }
+
+  .section-subtitle {
+    @apply text-ocean-300 text-lg mt-2;
+  }
+
+  .nav-link {
+    @apply text-ocean-200 hover:text-white transition-colors duration-150 text-sm font-medium;
+  }
+
+  .nav-link-active {
+    @apply text-white font-semibold;
+  }
+}
+
+@layer utilities {
+  .text-gradient-ocean {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-ocean-300 to-seafoam-400;
+  }
+
+  .glow-ocean {
+    filter: drop-shadow(0 0 12px rgba(15, 163, 204, 0.5));
+  }
+}
